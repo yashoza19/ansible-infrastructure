@@ -1,7 +1,6 @@
 ---
 
-aws_access_key: "AKIA5FMTBT3ZX527RPHZ"
-aws_secret_key: "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"
+
 region: "us-east-1"
 
 # VPC
