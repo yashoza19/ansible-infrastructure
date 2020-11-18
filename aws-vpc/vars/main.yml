@@ -1,14 +1,19 @@
 ---
 
-aws_access_key: ""
-aws_secret_key: ""
+aws_access_key: "AKIA5FMTBT3ZX527RPHZ"
+aws_secret_key: "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"
 region: "us-east-1"
 
 # VPC
-vpc_cidr: 10.10.0.0/24
-vpc_name: "Ansible VPC3"
+vpc_cidr: 10.0.0.0/16
+vpc_name: "Ansible VPC"
 
 # Subnet
-subnet_name: "Ansible Subnet"
-subnet_cidr: 10.10.0.0/26
-subnet1: "test"
+subnet_name1: "Ansible Subnet1"
+subnet_cidr1: 10.0.1.0/24
+subnet_name2: "Ansible Subnet2"
+subnet_cidr2: 10.0.2.0/24
+subnet_name3: "Ansible Subnet3"
+subnet_cidr3: 10.0.3.0/24
+
+igw_name: "Traffic IGW"

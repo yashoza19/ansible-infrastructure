@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+
+  roles:
+    - aws-vpc
+
+  environment:
+    AWS_PROFILE: default
