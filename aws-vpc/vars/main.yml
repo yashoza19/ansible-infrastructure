@@ -1,0 +1,13 @@
+---
+
+aws_access_key: ""
+aws_secret_key: ""
+region: "us-east-1"
+
+# VPC
+vpc_cidr: 10.10.0.0/24
+vpc_name: "Ansible VPC3"
+
+# Subnet
+subnet_name: "Ansible Subnet"
+subnet_cidr: 10.10.0.0/26
