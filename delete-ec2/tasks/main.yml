@@ -1,0 +1,18 @@
+---
+# tasks file for delete-ec2
+ - name: Get all EC2 instances
+   ec2_instance_info:
+     filters:
+       "tag:app": "jenkins"
+       "instance-state-name": running
+     region: us-east-1
+   register: all_ec2
+
+ - name: Delete EC2
+   ec2:
+     region: us-east-1
+     state: absent
+     wait: yes
+     instance_ids: '{{ item.instance_id }}'
+   with_items: "{{all_ec2.instances}}"
+   when: all_ec2.instances is defined

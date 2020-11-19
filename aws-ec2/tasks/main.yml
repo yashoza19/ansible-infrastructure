@@ -35,5 +35,49 @@
      var:
        ec2
 
-        
-        
+ - name: EC2 instances
+   ec2_instance_info:
+     filters:
+       "tag:app": jenkins
+       "instance-state-name": running
+     region: us-east-1
+   register: elastic_ip_ec2
+
+ - debug:
+     var:
+       elastic_ip_ec2
+ 
+ - name: wait for instance to be created
+   wait_for:
+     host: "{{ item.public_dns_name}}"
+     port: 22
+     state: started
+   with_items: "{{ elastic_ip_ec2.instances }}"
+   when: all_ec2.instances | length == 0
+
+ - name: add hosts
+   add_host:
+     name: "{{ item.public_ip_address }}"
+     groups: jenkinserver
+     ansible_ssh_user: ubuntu
+     ansible_ssh_host: "{{ item.public_dns_name }}"
+     ansible_ssh_private_key_file: "{{ keypair_name }}"
+   with_items: "{{ elastic_ip_ec2.instances }}"
+   when: all_ec2.instances | length == 0
+
+ - debug:
+     var:
+       ec2
+
+ - name: update route 53 record
+   route53:
+     state: present
+     zone: "{{ domain_name }}"
+     record: "jenkins.{{ domain_name }}"
+     type: A
+     ttl: 60
+     overwrite: yes
+     value: "{{ item.private_ip }}"
+     wait: yes
+   with_items: "{{ ec2.instances }}"
+   when: all_ec2.instances | length == 0
