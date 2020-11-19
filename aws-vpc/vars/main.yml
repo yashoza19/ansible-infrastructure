@@ -1,6 +1,5 @@
 ---
 
-
 region: "us-east-1"
 
 # VPC
@@ -16,3 +15,8 @@ subnet_name3: "Ansible Subnet3"
 subnet_cidr3: 10.0.3.0/24
 
 igw_name: "Traffic IGW"
+
+ec2_tag: "WebServer"
+
+ec2_key_directory: "/home/yash/Downloads/"
+keypair_name: "ansible"

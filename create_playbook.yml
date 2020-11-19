@@ -3,6 +3,7 @@
 
   roles:
     - aws-vpc
+    - aws-ec2
 
   environment:
     AWS_PROFILE: default

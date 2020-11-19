@@ -1,2 +1,39 @@
 ---
-# tasks file for aws-ec2
+
+ - name: Get all EC2 instances
+   ec2_instance_info:
+     filters:
+       "tag:app": jenkins
+       "instance-state-name": running
+     region: us-east-1
+   register: all_ec2
+
+ - debug:
+     var:
+       all_ec2
+
+ - name: create ec2
+   ec2:
+     assign_public_ip: yes
+     image: ami-00ddb0e5626798373
+     count_tag: app
+     group_id: "{{ security_group.group_id }}"
+     exact_count: 1
+     aws_access_key: "{{ aws_access_key }}"
+     aws_secret_key: "{{ aws_secret_key }}"
+     region: us-east-1
+     instance_tags:
+       "app": "jenkins"
+     instance_type: t2.micro
+     key_name: ansible
+     vpc_subnet_id: "{{ subnet.subnet.id }}"
+     wait: true
+   register: ec2
+   when: all_ec2.instances | length == 0
+
+ - debug:
+     var:
+       ec2
+
+        
+        
