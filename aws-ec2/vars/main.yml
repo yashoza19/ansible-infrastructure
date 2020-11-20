@@ -19,5 +19,6 @@ igw_name: "Traffic IGW"
 ec2_tag: "WebServer"
 
 ec2_key_directory: "/home/yash/Downloads/"
-keypair_name: "ansible"
+keypair_name: "keypair-ansible"
 domain_name: "yashdoza.me"
+keyfile: "~/Downloads/keypair-ansible.pem"

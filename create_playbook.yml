@@ -7,3 +7,10 @@
 
   environment:
     AWS_PROFILE: default
+
+- hosts: jenkinserver
+  become: yes
+  remote_user: ubuntu
+
+  roles:
+    - install-jenkins
