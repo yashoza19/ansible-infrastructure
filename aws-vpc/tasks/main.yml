@@ -73,11 +73,16 @@
     region: "{{ region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
+    tags:
+      name: my-rt
     subnets:
-      - "{{ subnet.subnet.id }}"
+      - "{{ subnet_cidr1 }}"
+      - "{{ subnet_cidr2 }}"
+      - "{{ subnet_cidr3 }}"
     routes:
       - dest: 0.0.0.0/0
         gateway_id: "{{ igw.gateway_id  }}"
+    state: present
 
 
  - name: Create Security Group
@@ -88,6 +93,8 @@
     region: "{{ region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
+    tags:
+      Name: ansible-sg
     rules:
       - proto: tcp
         ports:
